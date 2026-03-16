@@ -9,17 +9,18 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+SITE_ROOT = ROOT / "docs"
 CACHE_PATH = ROOT / ".translation_cache.json"
 
 PAGES = [
     {
         "url": "https://memxlife.github.io/books/mlsys/chapter1.html",
-        "output": ROOT / "chapter1.md",
+        "output": SITE_ROOT / "chapter1.md",
         "chapter_label": "第 1 章",
     },
     {
         "url": "https://memxlife.github.io/books/mlsys/chapter2.html",
-        "output": ROOT / "chapter2.md",
+        "output": SITE_ROOT / "chapter2.md",
         "chapter_label": "第 2 章",
     },
 ]
@@ -456,6 +457,7 @@ def translate_markdown(markdown: str, url: str, chapter_label: str, cache: dict)
 
 def main() -> None:
     cache = load_cache()
+    SITE_ROOT.mkdir(parents=True, exist_ok=True)
     for page in PAGES:
         markdown = fetch_markdown(page["url"])
         translated = translate_markdown(
