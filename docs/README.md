@@ -1,6 +1,6 @@
 # MLSys 中文整理
 
-这个站点整理了 Machine Learning Systems 网页教材的中文翻译，并使用 docsify 构建为可直接部署到 GitHub Pages 的静态站点。
+这个站点整理了 [Machine Learning Systems (ML Sys)](https://memxlife.github.io/courses/mlsys.html) 网页教材的中文翻译，并使用 docsify 构建为可直接部署到 GitHub Pages 的静态站点。
 
 ## 当前内容
 
