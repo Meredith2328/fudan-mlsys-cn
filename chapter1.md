@@ -86,13 +86,13 @@ $$
 这个近似问题最自然的表述是使平方重建误差最小化：
 
 $$
-\min_{c} \| x - Uc \|_2^2.
+\min_{c} \lVert x - Uc \rVert_2^2.
 $$
 
 在这个阶段，我们必须精确。物镜在$c$中呈二次曲线，其最小化可以通过将梯度设置为零来获得。取$c$收益率的导数
 
 $$
-\nabla_c \| x - Uc \|_2^2 = -2 U^T (x - Uc).
+\nabla_c \lVert x - Uc \rVert_2^2 = -2 U^T (x - Uc).
 $$
 
 将此梯度设置为零会生成正常方程：
@@ -138,7 +138,7 @@ $$
 因此，我们考虑全局优化问题：
 
 $$
-\min_{U} \sum_{i=1}^m \| x_i - P_U x_i \|_2^2,
+\min_{U} \sum_{i=1}^m \lVert x_i - P_U x_i \rVert_2^2,
 $$
 
 受$U$的适当约束。
@@ -148,25 +148,25 @@ $$
 在此约束下，投影简化为$P_U = U U^T$，重构误差变为
 
 $$
-\| x_i - U U^T x_i \|_2^2.
+\lVert x_i - U U^T x_i \rVert_2^2.
 $$
 
 展开此表达式将产生
 
 $$
-\| x_i \|_2^2 - \| U^T x_i \|_2^2.
+\lVert x_i \rVert_2^2 - \lVert U^T x_i \rVert_2^2.
 $$
 
 将所有样本相加并除以$m$，我们得到
 
 $$
-\frac{1}{m} \sum_{i=1}^m \| x_i \|_2^2 - \frac{1}{m} \sum_{i=1}^m \| U^T x_i \|_2^2.
+\frac{1}{m} \sum_{i=1}^m \lVert x_i \rVert_2^2 - \frac{1}{m} \sum_{i=1}^m \lVert U^T x_i \rVert_2^2.
 $$
 
 第一项独立于$U$。因此，最小化重建误差等同于最大化
 
 $$
-\frac{1}{m} \sum_{i=1}^m \| U^T x_i \|_2^2.
+\frac{1}{m} \sum_{i=1}^m \lVert U^T x_i \rVert_2^2.
 $$
 
 我们现在介绍经验协方差矩阵
@@ -178,7 +178,7 @@ $$
 注意：
 
 $$
-\frac{1}{m} \sum_{i=1}^m \| U^T x_i \|_2^2
+\frac{1}{m} \sum_{i=1}^m \lVert U^T x_i \rVert_2^2
 = \frac{1}{m} \sum_{i=1}^m x_i^T U U^T x_i
 = \mathrm{Tr}(U^T \Sigma U).
 $$

@@ -315,6 +315,30 @@ def cleanup_translation(text: str) -> str:
     return text.strip()
 
 
+def replace_norm_bars(math_text: str) -> str:
+    count = 0
+
+    def repl(_: re.Match[str]) -> str:
+        nonlocal count
+        count += 1
+        return r"\lVert" if count % 2 == 1 else r"\rVert"
+
+    return re.sub(r"\\\|", repl, math_text)
+
+
+def normalize_latex_delimiters(markdown: str) -> str:
+    patterns = [
+        re.compile(r"\$\$(.*?)\$\$", re.S),
+        re.compile(r"\\\[(.*?)\\\]", re.S),
+        re.compile(r"(?<!\$)\$(?!\$)(.+?)(?<!\$)\$(?!\$)", re.S),
+    ]
+
+    for pattern in patterns:
+        markdown = pattern.sub(lambda match: replace_norm_bars(match.group(0)), markdown)
+
+    return markdown
+
+
 def is_list_item(line: str) -> bool:
     return bool(re.match(r"^\s*(?:[-*+]\s+|\d+\.\s+)", line))
 
@@ -426,7 +450,8 @@ def translate_markdown(markdown: str, url: str, chapter_label: str, cache: dict)
         paragraph = " ".join(paragraph_lines)
         out.append(translate_text(paragraph, cache))
 
-    return "\n".join(out).rstrip() + "\n"
+    markdown = "\n".join(out).rstrip() + "\n"
+    return normalize_latex_delimiters(markdown)
 
 
 def main() -> None:
