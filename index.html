@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MLSys 中文整理</title>
+  <meta name="description" content="Machine Learning Systems 第 1-2 章中文整理，基于 docsify 可直接发布到 GitHub Pages。" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" />
+  <style>
+    :root {
+      --theme-color: #0b6bcb;
+      --sidebar-name-color: #10233f;
+      --base-background: #f4f7fb;
+      --content-max-width: 980px;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top right, rgba(11, 107, 203, 0.12), transparent 28rem),
+        linear-gradient(180deg, #f7fbff 0%, #eef3f9 100%);
+      font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
+    }
+
+    .sidebar,
+    .cover {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+    }
+
+    .sidebar {
+      border-right: 1px solid rgba(16, 35, 63, 0.08);
+    }
+
+    .sidebar-nav > ul > li > a {
+      font-weight: 700;
+    }
+
+    .markdown-section {
+      max-width: var(--content-max-width);
+      padding-bottom: 4rem;
+    }
+
+    .markdown-section h1,
+    .markdown-section h2,
+    .markdown-section h3 {
+      color: #10233f;
+      letter-spacing: 0.01em;
+    }
+
+    .markdown-section p,
+    .markdown-section li,
+    .markdown-section blockquote {
+      line-height: 1.9;
+      color: #26364d;
+    }
+
+    .markdown-section code,
+    .markdown-section pre {
+      font-family: "Cascadia Code", "JetBrains Mono", "Fira Code", Consolas, monospace;
+    }
+
+    .markdown-section blockquote {
+      border-left: 4px solid rgba(11, 107, 203, 0.35);
+      background: rgba(11, 107, 203, 0.05);
+      padding: 0.6rem 1rem;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .markdown-section table {
+      display: table;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+      },
+      svg: {
+        fontCache: "global"
+      }
+    };
+
+    window.$docsify = {
+      name: "MLSys 中文整理",
+      homepage: "README.md",
+      loadSidebar: true,
+      subMaxLevel: 2,
+      auto2top: true,
+      topMargin: 72,
+      search: {
+        depth: 4,
+        noData: "没有找到结果",
+        placeholder: "搜索章节内容"
+      },
+      plugins: [
+        function(hook) {
+          hook.doneEach(function() {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+              window.MathJax.typesetClear();
+              window.MathJax.typesetPromise();
+            }
+          });
+        }
+      ]
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</body>
+</html>
