@@ -10,6 +10,8 @@
 | :--- | :--- | :--- | :--- |
 | 1 | Introduction: The Intellectual Map of Machine Learning Systems | [Book Chapter 1](https://memxlife.github.io/books/mlsys/chapter1.html) | [第 1 章：机器学习系统：问题、约束与垂直整合](docs/chapter1.md) |
 | 2 | CPU Foundations and GPU Emergence | [Book Chapter 2](https://memxlife.github.io/books/mlsys/chapter2.html) | [第 2 章：CPU 基础、GPU 的兴起与吞吐计算的逻辑](docs/chapter2.md) |
+| 3 | GPU Architecture for Machine Learning Systems | [Book Chapter 3](https://memxlife.github.io/books/mlsys/chapter3.html) | [第 3 章：GPU 架构与机器学习系统](docs/chapter3.md) |
+| 4 | CUDA Programming Begins with Architecture | [Book Chapter 4](https://memxlife.github.io/books/mlsys/chapter4.html) | [第 4 章：CUDA 编程从架构开始](docs/chapter4.md) |
 
 ## 说明
 

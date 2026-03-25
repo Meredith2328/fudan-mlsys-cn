@@ -23,6 +23,16 @@ PAGES = [
         "output": SITE_ROOT / "chapter2.md",
         "chapter_label": "第 2 章",
     },
+    {
+        "url": "https://memxlife.github.io/books/mlsys/chapter3.html",
+        "output": SITE_ROOT / "chapter3.md",
+        "chapter_label": "第 3 章",
+    },
+    {
+        "url": "https://memxlife.github.io/books/mlsys/chapter4.html",
+        "output": SITE_ROOT / "chapter4.md",
+        "chapter_label": "第 4 章",
+    },
 ]
 
 HEADING_OVERRIDES = {
@@ -143,9 +153,63 @@ def fetch_markdown(url: str) -> str:
         re.S,
     )
     if not match:
-        raise RuntimeError(f"Could not find embedded markdown in {url}")
+        return extract_markdown_from_html(raw)
 
     return html.unescape(match.group(1)).strip() + "\n"
+
+
+def extract_markdown_from_html(raw_html: str) -> str:
+    try:
+        from bs4 import BeautifulSoup
+    except Exception as error:
+        raise RuntimeError(
+            "BeautifulSoup is required for HTML-only chapters. "
+            "Please install: pip install beautifulsoup4"
+        ) from error
+
+    soup = BeautifulSoup(raw_html, "html.parser")
+    container = (
+        soup.select_one(".inner")
+        or soup.select_one(".page")
+        or soup.body
+    )
+    if container is None:
+        raise RuntimeError("Could not locate readable HTML container")
+
+    for tag in container.find_all(["script", "style"]):
+        tag.decompose()
+
+    lines: list[str] = []
+    for tag in container.find_all(["h1", "h2", "h3", "p", "pre", "hr"]):
+        name = tag.name
+        if name is None:
+            continue
+
+        if name == "hr":
+            lines.extend(["---", ""])
+            continue
+
+        if name in {"h1", "h2", "h3"}:
+            level = int(name[1])
+            text = " ".join(tag.get_text(" ", strip=True).split())
+            if text:
+                lines.extend([("#" * level) + " " + text, ""])
+            continue
+
+        if name == "pre":
+            code_text = tag.get_text("\n", strip=False).strip("\n")
+            lines.extend(["```text", code_text, "```", ""])
+            continue
+
+        if name == "p":
+            text = " ".join(tag.get_text(" ", strip=True).split())
+            if text:
+                lines.extend([text, ""])
+
+    markdown = "\n".join(lines).strip()
+    if not markdown:
+        raise RuntimeError("Extracted empty markdown from HTML page")
+    return markdown + "\n"
 
 
 def protect_literals(text: str):

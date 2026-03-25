@@ -2,3 +2,5 @@
 - [AI提供的前两章总结](conclusion.md)
 - [1 机器学习系统：问题、约束与垂直整合](chapter1.md)
 - [2 CPU 基础、GPU 的兴起与吞吐计算的逻辑](chapter2.md)
+- [3 GPU 架构与机器学习系统](chapter3.md)
+- [4 CUDA 编程从架构开始](chapter4.md)
