@@ -13,7 +13,7 @@
 
 ## 导航
 
-- [AI 提供的前两章总结](summary-ch1-ch2.md)
+- [AI 提供的一二章总结](summary-ch1-ch2.md)
 - [AI 提供的三四章总结](summary-ch3-ch4.md)
 - [第 1 章：机器学习系统：问题、约束与垂直整合](chapter1.md)
 - [第 2 章：CPU 基础、GPU 的兴起与吞吐计算的逻辑](chapter2.md)
