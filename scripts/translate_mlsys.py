@@ -1,5 +1,6 @@
 import hashlib
 import html
+from html.parser import HTMLParser
 import json
 import re
 import time
@@ -32,6 +33,16 @@ PAGES = [
         "url": "https://memxlife.github.io/books/mlsys/chapter4.html",
         "output": SITE_ROOT / "chapter4.md",
         "chapter_label": "第 4 章",
+    },
+    {
+        "url": "https://memxlife.github.io/books/mlsys/chapter5.html",
+        "output": SITE_ROOT / "chapter5.md",
+        "chapter_label": "第 5 章",
+    },
+    {
+        "url": "https://memxlife.github.io/books/mlsys/ma-infra.html",
+        "output": SITE_ROOT / "chapter6.md",
+        "chapter_label": "第 6 章",
     },
 ]
 
@@ -78,6 +89,10 @@ HEADING_OVERRIDES = {
     "2.10 Programmability, Unified Shaders, and the Meaning of Flexibility": "2.10 可编程性、统一着色器与灵活性的含义",
     "2.11 CUDA as the Decisive Software Abstraction": "2.11 CUDA：决定性的软硬件抽象",
     "2.12 The Lesson of Chapter 2": "2.12 第 2 章的结论",
+    "Chapter 5. CUDA Programming as Hardware-Software Co-Optimization": "第 5 章 CUDA 编程作为软硬件协同优化",
+    "From Naive Matrix Multiplication to Hierarchical Tiling": "从朴素矩阵乘法到分层分块",
+    "Inside Claude Code, Reconstructed and Interpreted": "第 6 章 Claude Code 内部机制：重建与解读",
+    "What a production AI coding agent really looks like under the hood": "生产级 AI 编码智能体在底层究竟是什么样子",
 }
 
 GLOSSARY = {
@@ -107,6 +122,11 @@ GLOSSARY = {
     "BF16": "BF16",
     "FP16": "FP16",
     "FP8": "FP8",
+    "Claude Code": "Claude Code",
+    "warp": "warp",
+    "warps": "warps",
+    "TFLOP/s": "TFLOP/s",
+    "GFLOP/s": "GFLOP/s",
 }
 
 INLINE_PATTERNS = [
@@ -126,6 +146,19 @@ POST_REPLACEMENTS = {
     "机器学习 系统": "机器学习系统",
     "矩阵乘法内核": "矩阵乘法内核",
     "通用矩阵乘法": "通用矩阵乘法",
+    "克劳德代码": "Claude Code",
+    "克劳德码": "Claude Code",
+    "扭曲": "warp",
+    "扭曲感知": "warp 感知",
+    "扭曲平铺": "warp 平铺",
+    "扭曲执行": "warp 执行",
+    "扭曲级": "warp 级",
+    "扭曲内": "warp 内",
+    "建筑模式": "架构模式",
+    "建筑思想": "架构思想",
+    "交流安置": "通信布局",
+    "该论文": "这一论点",
+    "That would miss the deeper structure.": "那样会错过更深层的结构。",
 }
 
 
@@ -158,53 +191,104 @@ def fetch_markdown(url: str) -> str:
     return html.unescape(match.group(1)).strip() + "\n"
 
 
+class SimpleHTMLToMarkdown(HTMLParser):
+    BLOCK_TAGS = {"h1", "h2", "h3", "p", "pre", "blockquote", "li"}
+    SKIP_TAGS = {"script", "style", "noscript"}
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.lines: list[str] = []
+        self.tag_stack: list[str] = []
+        self.skip_depth = 0
+        self.capture_tag: str | None = None
+        self.capture_parts: list[str] = []
+        self.list_stack: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs) -> None:
+        self.tag_stack.append(tag)
+        if tag in self.SKIP_TAGS:
+            self.skip_depth += 1
+            return
+
+        if self.skip_depth:
+            return
+
+        if tag in {"ul", "ol"}:
+            self.list_stack.append(tag)
+            return
+
+        if tag == "hr":
+            self.lines.extend(["---", ""])
+            return
+
+        if tag in self.BLOCK_TAGS:
+            self.capture_tag = tag
+            self.capture_parts = []
+            return
+
+        if tag == "br" and self.capture_tag == "pre":
+            self.capture_parts.append("\n")
+
+    def handle_endtag(self, tag: str) -> None:
+        while self.tag_stack:
+            popped = self.tag_stack.pop()
+            if popped == tag:
+                break
+
+        if tag in self.SKIP_TAGS:
+            self.skip_depth = max(0, self.skip_depth - 1)
+            return
+
+        if self.skip_depth:
+            return
+
+        if tag in {"ul", "ol"}:
+            if self.list_stack:
+                self.list_stack.pop()
+            return
+
+        if tag != self.capture_tag:
+            return
+
+        raw_text = "".join(self.capture_parts)
+        if tag == "pre":
+            text = html.unescape(raw_text).strip("\n")
+            if text:
+                self.lines.extend(["```text", text, "```", ""])
+        else:
+            text = " ".join(html.unescape(raw_text).split())
+            if text:
+                if tag == "blockquote":
+                    self.lines.extend([f"> {text}", ""])
+                elif tag == "li":
+                    marker = "1. " if self.list_stack and self.list_stack[-1] == "ol" else "- "
+                    self.lines.append(marker + text)
+                elif tag in {"h1", "h2", "h3"}:
+                    level = int(tag[1])
+                    self.lines.extend([("#" * level) + " " + text, ""])
+                else:
+                    self.lines.extend([text, ""])
+
+        self.capture_tag = None
+        self.capture_parts = []
+
+    def handle_data(self, data: str) -> None:
+        if self.skip_depth or self.capture_tag is None:
+            return
+        self.capture_parts.append(data)
+
+
 def extract_markdown_from_html(raw_html: str) -> str:
-    try:
-        from bs4 import BeautifulSoup
-    except Exception as error:
-        raise RuntimeError(
-            "BeautifulSoup is required for HTML-only chapters. "
-            "Please install: pip install beautifulsoup4"
-        ) from error
+    body_match = re.search(r"<body\b[^>]*>(.*?)</body>", raw_html, re.S | re.I)
+    html_body = body_match.group(1) if body_match else raw_html
 
-    soup = BeautifulSoup(raw_html, "html.parser")
-    container = (
-        soup.select_one(".inner")
-        or soup.select_one(".page")
-        or soup.body
-    )
-    if container is None:
-        raise RuntimeError("Could not locate readable HTML container")
+    parser = SimpleHTMLToMarkdown()
+    parser.feed(html_body)
+    parser.close()
 
-    for tag in container.find_all(["script", "style"]):
-        tag.decompose()
-
-    lines: list[str] = []
-    for tag in container.find_all(["h1", "h2", "h3", "p", "pre", "hr"]):
-        name = tag.name
-        if name is None:
-            continue
-
-        if name == "hr":
-            lines.extend(["---", ""])
-            continue
-
-        if name in {"h1", "h2", "h3"}:
-            level = int(name[1])
-            text = " ".join(tag.get_text(" ", strip=True).split())
-            if text:
-                lines.extend([("#" * level) + " " + text, ""])
-            continue
-
-        if name == "pre":
-            code_text = tag.get_text("\n", strip=False).strip("\n")
-            lines.extend(["```text", code_text, "```", ""])
-            continue
-
-        if name == "p":
-            text = " ".join(tag.get_text(" ", strip=True).split())
-            if text:
-                lines.extend([text, ""])
+    lines = parser.lines
+    if lines and lines[0].startswith("# memxlife"):
+        lines = lines[2:] if len(lines) > 1 and lines[1] == "" else lines[1:]
 
     markdown = "\n".join(lines).strip()
     if not markdown:
