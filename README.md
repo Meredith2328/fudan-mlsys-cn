@@ -14,6 +14,8 @@
 | 4 | CUDA Programming Begins with Architecture | [Book Chapter 4](https://memxlife.github.io/books/mlsys/chapter4.html) | [第 4 章：CUDA 编程从架构开始](docs/chapter4.md) |
 | 5 | CUDA Programming as Hardware-Software Co-Optimization | [Book Chapter 5](https://memxlife.github.io/books/mlsys/chapter5.html) | [第 5 章：CUDA 编程作为软硬件协同优化](docs/chapter5.md) |
 | 6 | Inside Claude Code, Reconstructed and Interpreted | [Machine Learning Infrastructure](https://memxlife.github.io/books/mlsys/ma-infra.html) | [第 6 章：Claude Code 内部机制：重建与解读](docs/chapter6.md) |
+| 7 | Deep Learning Compilers — From Generality to Specialization, and Back to Learned Search | [Book Chapter 7](https://memxlife.github.io/books/mlsys/chapter7.html) | [第 7 章：深度学习编译器：从通用性到专用化，再回到学习式搜索](docs/chapter7.md) |
+| Project | MLSYS Course Project | [Project Page](https://memxlife.github.io/books/mlsys/project.html) | [课程项目说明](docs/project.md) |
 
 ## 说明
 

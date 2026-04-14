@@ -8,4 +8,6 @@
 - [4 CUDA 编程从架构开始](chapter4.md)
 - [5 CUDA 编程作为软硬件协同优化](chapter5.md)
 - [6 Claude Code 内部机制：重建与解读](chapter6.md)
+- [7 深度学习编译器：从通用性到专用化，再回到学习式搜索](chapter7.md)
+- [课程项目说明](project.md)
 - [Profiling简单教程](./tutorial.md)
