@@ -2,7 +2,7 @@
 
 在线阅读： [MLSys 中文整理](https://meredith2328.github.io/fudan-mlsys-cn/#/)
 
-本仓库整理了复旦大学 [Machine Learning Systems (ML Sys)](https://memxlife.github.io/courses/mlsys.html) （2026春，尚笠老师）课程网页教材的中文翻译。
+本仓库整理了复旦大学 [Machine Learning Systems (ML Sys)](https://memxlife.github.io/courses/mlsys.html) （2026春，尚笠老师/徐跃东老师）课程网页教材的中文翻译。
 
 ## 当前内容
 
