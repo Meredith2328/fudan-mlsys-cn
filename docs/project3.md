@@ -160,11 +160,11 @@ class Engine:
 
 正确性检查公式：
 
-\[|y_{\mathrm{student}} - y_{\mathrm{ref}}| \leq \mathrm{atol} + \mathrm{rtol} \cdot |y_{\mathrm{ref}}|\]
+$$|y_{\mathrm{student}} - y_{\mathrm{ref}}| \leq \mathrm{atol} + \mathrm{rtol} \cdot |y_{\mathrm{ref}}|$$
 
 公开骨架使用：
 
-\[\mathrm{atol}=10^{-2}, \quad \mathrm{rtol}=10^{-2}\]
+$$\mathrm{atol}=10^{-2}, \quad \mathrm{rtol}=10^{-2}$$
 
 公开正确性测试使用：
 
@@ -206,11 +206,11 @@ engine.remove(...)
 
 吞吐量报告为：
 
-\[\mathrm{tokens/s}=\frac{\mathrm{prefill\ tokens}+\mathrm{decode\ tokens}}{\mathrm{elapsed\ seconds}}\]
+$$\mathrm{tokens/s}=\frac{\mathrm{prefill\ tokens}+\mathrm{decode\ tokens}}{\mathrm{elapsed\ seconds}}$$
 
 Decode 吞吐量报告为：
 
-\[\mathrm{decode\ tokens/s}=\frac{\mathrm{decode\ tokens}}{\mathrm{elapsed\ seconds}}\]
+$$\mathrm{decode\ tokens/s}=\frac{\mathrm{decode\ tokens}}{\mathrm{elapsed\ seconds}}$$
 
 公开 benchmark 包含三类用例：
 

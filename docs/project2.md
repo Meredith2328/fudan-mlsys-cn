@@ -15,15 +15,15 @@
 
 你的目标算子是：
 
-\[Y = W X + A(B^T X)\]
+$$Y = W X + A(B^T X)$$
 
 其中：
 
-\(W \in \mathbb{R}^{d \times d}\)，
-\(X \in \mathbb{R}^{d \times d}\)，
-\(A \in \mathbb{R}^{d \times r}\)，
-\(B \in \mathbb{R}^{d \times r}\)，
-\(r = 16\)。
+$W \in \mathbb{R}^{d \times d}$，
+$X \in \mathbb{R}^{d \times d}$，
+$A \in \mathbb{R}^{d \times r}$，
+$B \in \mathbb{R}^{d \times r}$，
+$r = 16$。
 
 所有张量均以 **`.pt` 文件**存储，可通过 `torch.load` 加载。
 所有隐藏评测张量使用 **`float32`**。
@@ -35,7 +35,7 @@
 - **隐藏维度 $d$** 从 [3584, 4608] 中选取。
 - 本项目公开范围如下：
 
-\[d \in [3584, 4608]\]
+$$d \in [3584, 4608]$$
 
 评测时我们会选多个 $d$ 在此区间内的测试用例。因此你设计的 agent 和生成的 CUDA 代码应能处理**此区间内的多种尺寸**，而不是只对某一个精确矩阵形状过拟合。
 
@@ -282,7 +282,7 @@ module.forward(W, X, A, B)
 - 隐藏评测张量使用 `float32`
 - 被测算子为：
 
-\[Y = W X + A(B^T X)\]
+$$Y = W X + A(B^T X)$$
 
 - 隐藏维度 $d$ **不固定**
 - 评测使用多个尺寸，$d \in [3584, 4608]$
@@ -297,7 +297,7 @@ module.forward(W, X, A, B)
 
 正确性对照 PyTorch 参考实现检查：
 
-\[Y_{\text{ref}} = W X + A(B^T X)\]
+$$Y_{\text{ref}} = W X + A(B^T X)$$
 
 使用：
 
@@ -319,7 +319,7 @@ torch.allclose(Y_student, Y_ref, rtol=1e-4, atol=1e-4)
 
 加速比计算为：
 
-\[\text{speedup} = \frac{\text{标准 PyTorch 实现的运行时间中位数}}{\text{你的 CUDA 实现的运行时间中位数}}\]
+$$\text{speedup} = \frac{\text{标准 PyTorch 实现的运行时间中位数}}{\text{你的 CUDA 实现的运行时间中位数}}$$
 
 运行时间测量使用：
 
@@ -381,7 +381,7 @@ torch.allclose(Y_student, Y_ref, rtol=1e-4, atol=1e-4)
 - 产出一个单文件、自包含的最终 CUDA 实现
 - 对算子
 
-\[Y = W X + A(B^T X)\]
+$$Y = W X + A(B^T X)$$
 
 在 [3584, 4608] 区间内的多个隐藏测试尺寸上做优化。
 

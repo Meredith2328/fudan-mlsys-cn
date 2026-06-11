@@ -96,12 +96,12 @@ DeepSeekMoE 改进 MoE 的方式不是简单地加更多专家，而是改变专
 
 用简化符号，MoE 的输出可以写成：
 
-\[h'_t =
+$$h'_t =
 u_t
 +
 \sum_{i=1}^{N_s} \operatorname{FFN}^{(s)}_i(u_t)
 +
-\sum_{i=1}^{N_r} g_{i,t}\operatorname{FFN}^{(r)}_i(u_t),\]
+\sum_{i=1}^{N_r} g_{i,t}\operatorname{FFN}^{(r)}_i(u_t),$$
 
 其中 $N_s$ 个共享专家始终激活，$N_r$ 个路由专家构成候选池，$g_{i,t}$ 仅对 token $t$ 选中的 top-$K_r$ 个路由专家非零。这个方程就是共享容量和路由容量之间的实际区别：共享专家贡献稠密的公共通路；路由专家贡献稀疏的逐 token 专用容量。
 
@@ -221,9 +221,9 @@ RL 阶段引入了 GRPO。对每个 prompt，GRPO 采样一组输出，给它们
 
 GRPO 的优势估计是节省内存的核心操作：
 
-\[A_i =
+$$A_i =
 \frac{r_i - \operatorname{mean}(r_1,\ldots,r_G)}
-{\operatorname{std}(r_1,\ldots,r_G)}.\]
+{\operatorname{std}(r_1,\ldots,r_G)}.$$
 
 PPO 需要一个学习出来的 value 模型来估计优势；GRPO 则利用采样组内的奖励分布。这就是为什么这个方法对 7B 规模的数学 RL 有吸引力，也为什么后来被用到更大的 DeepSeek 推理模型中。
 
@@ -275,17 +275,17 @@ DeepSeek-V2 是一个 Transformer，它的注意力和 FFN 模块都重新设计
 
 注意力实现的独特之处在于 MLA。在标准 MHA 中，生成为每个之前 token 和每一层缓存所有 key 和 value，每个 token 需要缓存 $2n_h d_h l$ 个元素，其中 $n_h$ 是头的数量，$d_h$ 是每头维度，$l$ 是层数。MLA 改为计算一个压缩的隐 KV 向量：
 
-\[c^{KV}_t = W^{DKV} h_t\]
+$$c^{KV}_t = W^{DKV} h_t$$
 
 并通过上投影重建压缩的 key 和 value：
 
-\[k^C_t = W^{UK} c^{KV}_t,\quad v^C_t = W^{UV} c^{KV}_t.\]
+$$k^C_t = W^{UK} c^{KV}_t,\quad v^C_t = W^{UV} c^{KV}_t.$$
 
 在推理时，模型缓存的是 $c^{KV}_t$ 而不是完整的每头 key 和 value。论文指出 $W^{UK}$ 可以在推理时被吸收进 query 投影，而 $W^{UV}$ 可以被吸收进输出投影，所以模型不需要为每个缓存的前缀 token 显式物化完整的 key 和 value。
 
 MLA 还加入了低秩 query 压缩以减少训练时的激活内存：
 
-\[c^Q_t = W^{DQ}h_t,\quad q^C_t = W^{UQ}c^Q_t.\]
+$$c^Q_t = W^{DQ}h_t,\quad q^C_t = W^{UQ}c^Q_t.$$
 
 一个微妙的实现问题是 RoPE。如果 RoPE 直接应用到压缩后的 key 上，位置敏感的旋转会阻止 key 上投影在推理时被吸收进 query 侧。V2 用解耦的 RoPE 解决了这个问题：内容 key/query 走压缩路径，而单独携带 RoPE 的 query/key 组件被生产出来，并与压缩组件做拼接。这样一来，V2 同时缓存隐 KV 向量和解耦的 RoPE key，缓存大小正比于 $(d_c + d^R_h)l$ 而非完整 MHA 的 $2n_h d_h l$。
 
@@ -393,9 +393,9 @@ V3 关键的 MoE 实现变化是无辅助损失的负载均衡。V3 不通过一
 
 路由的区分是微妙且重要的：
 
-\[\text{选择使用 } s_{i,t}+b_i,
+$$\text{选择使用 } s_{i,t}+b_i,
 \qquad
-\text{门控使用 } s_{i,t}.\]
+\text{门控使用 } s_{i,t}.$$
 
 偏置改变的是哪些专家对该 token 有资格被选中，但它并不直接缩放选中专家的输出。这尽可能地把均衡控制器排除在语义混合权重之外。
 
@@ -457,7 +457,7 @@ R1 从 DeepSeek-V3-Base 出发，因此继承了 V3 的 MoE 架构和预训练�
 
 RL 算法是 GRPO。对每个问题 $q$，旧策略采样一组输出 $\{o_1,\ldots,o_G\}$。每个输出得到一个奖励，其优势在组内规范化：
 
-\[A_i = \frac{r_i - \mathrm{mean}(\{r_1,\ldots,r_G\})}{\mathrm{std}(\{r_1,\ldots,r_G\})}.\]
+$$A_i = \frac{r_i - \mathrm{mean}(\{r_1,\ldots,r_G\})}{\mathrm{std}(\{r_1,\ldots,r_G\})}.$$
 
 策略目标使用 PPO 式裁剪加上针对参考策略的 KL 项，但避免了训练单独的 value 模型。对 R1-Zero，论文报告学习率 $3 \times 10^{-6}$、KL 系数 0.001、采样温度 1、每个问题 16 个输出、最大 rollout 长度在 step 8.2K 之前为 32,768 token、之后为 65,536、10,400 个训练步、每步 32 个不同问题、batch size 512。每 400 步，参考模型被替换为最新策略。为加速训练，每次 rollout 生成 8,192 个输出，分成 16 个 mini-batch，每个训练一个内层 epoch。
 
@@ -563,7 +563,7 @@ DeepSeek-V4 试图解决的核心问题不是简单地「如何让上下文窗�
 
 从 Transformer 某层的 hidden state 序列开始：
 
-\[H =
+$$H =
 \begin{bmatrix}
 h_0 \\
 h_1 \\
@@ -571,57 +571,57 @@ h_1 \\
 h_{n-1}
 \end{bmatrix}
 \in \mathbb{R}^{n \times d},
-\qquad h_j \in \mathbb{R}^{d}.\]
+\qquad h_j \in \mathbb{R}^{d}.$$
 
 这里 $n$ 是序列长度，$d$ 是隐维度。在普通注意力中，模型把 $H$ 投影成 key 和 value 并全部存储。CSA 的做法不同。它首先创建内容向量和压缩分数向量。内容向量是可能存活到压缩记忆中的信息。分数向量决定每个 token 和每个通道对压缩条目的贡献强度。
 
 对 CSA，DeepSeek-V4 使用两个内容流：
 
-\[C^a = H W^a_{KV},
+$$C^a = H W^a_{KV},
 \qquad
 C^b = H W^b_{KV},
 \qquad
-W^a_{KV}, W^b_{KV} \in \mathbb{R}^{d \times c}.\]
+W^a_{KV}, W^b_{KV} \in \mathbb{R}^{d \times c}.$$
 
 对 token $j$，这意味着：
 
-\[C^a_j = h_j W^a_{KV},
+$$C^a_j = h_j W^a_{KV},
 \qquad
 C^b_j = h_j W^b_{KV},
 \qquad
-C^a_j, C^b_j \in \mathbb{R}^{c}.\]
+C^a_j, C^b_j \in \mathbb{R}^{c}.$$
 
 这两个流不是普通的注意力头。它们是 token 贡献给相邻压缩条目的两种方式。如果序列简单地被切成不重叠的四 token 块，跨越边界的短语、代码表达式或推理单元就可能被割裂。DeepSeek-V4 通过同时从当前块和前一个块构造每个 CSA 压缩条目来避免这一点。一个流让 token 贡献给压缩边界的一侧，另一个流让它贡献给相邻的压缩条目。这提供了有重叠的压缩，同时仍然每 $m$ 个 token 产出一个压缩条目。
 
 分数流类似地产生：
 
-\[Z^a = H W^a_Z,
+$$Z^a = H W^a_Z,
 \qquad
 Z^b = H W^b_Z,
 \qquad
-W^a_Z, W^b_Z \in \mathbb{R}^{d \times c}.\]
+W^a_Z, W^b_Z \in \mathbb{R}^{d \times c}.$$
 
 对 token $j$：
 
-\[Z^a_j = h_j W^a_Z,
+$$Z^a_j = h_j W^a_Z,
 \qquad
 Z^b_j = h_j W^b_Z,
 \qquad
-Z^a_j, Z^b_j \in \mathbb{R}^{c}.\]
+Z^a_j, Z^b_j \in \mathbb{R}^{c}.$$
 
 $Z$ 向量不作为记忆内容存储。它们是用于产生压缩权重的 logit。细节很重要：$Z$、$S$ 和 $C$ 都有通道维度 $c$。压缩不是每个 token 一个标量的重要性分数。它是一个逐通道的混合决策。压缩向量的不同维度可以从不同的源 token 中选择信息，这使得 CSA 比平均池化或标量 token 打分更具表达能力。
 
 DeepSeek-V4 使用 CSA 块大小 $m = 4$。对于压缩条目 $i$，当前块是：
 
-\[B_i = \{mi, mi+1, \ldots, m(i+1)-1\}.\]
+$$B_i = \{mi, mi+1, \ldots, m(i+1)-1\}.$$
 
 前一个块是：
 
-\[B_{i-1} = \{m(i-1), m(i-1)+1, \ldots, mi-1\}.\]
+$$B_{i-1} = \{m(i-1), m(i-1)+1, \ldots, mi-1\}.$$
 
 CSA 使用当前块的 $C^a$ 和前一块的 $C^b$ 来形成压缩条目 $i$。在混合内容之前，它先把 $Z$ logit 转换为规范化权重。它拼接当前块的 $Z^a$ logit 和前一块的 $Z^b$ logit，加上可学习的位置偏置，然后对 $2m$ 个候选 token 位置按每个通道执行 softmax：
 
-\[\left[
+$$\left[
 S^a_{mi:m(i+1)-1};
 S^b_{m(i-1):mi-1}
 \right]
@@ -632,17 +632,17 @@ S^b_{m(i-1):mi-1}
 Z^a_{mi:m(i+1)-1} + B^a;
 Z^b_{m(i-1):mi-1} + B^b
 \right]
-\right).\]
+\right).$$
 
 这就是 CSA 压缩的核心。$Z$ 给出未规范化的压缩 logit。$B^a$ 和 $B^b$ 注入了局部位置信息，因为 token 在压缩窗口内的位置是重要的。softmax 将这些 logit 转换为 $S$，即规范化的混合权重。由于 softmax 是在候选 token 位置上施加的，这些权重决定了哪些 token 位置对压缩记忆条目的每个通道做出贡献。
 
 CSA 随后形成压缩内容向量：
 
-\[C^{\mathrm{Comp}}_i
+$$C^{\mathrm{Comp}}_i
 =
 \sum_{j=mi}^{m(i+1)-1} S^a_j \odot C^a_j
 +
-\sum_{j=m(i-1)}^{mi-1} S^b_j \odot C^b_j.\]
+\sum_{j=m(i-1)}^{mi-1} S^b_j \odot C^b_j.$$
 
 乘法 $\odot$ 是逐元素的。如果 $S_j$ 是标量，token $j$ 要么对整个压缩向量贡献强，要么弱。但因为 $S_j \in \mathbb{R}^{c}$，token $j$ 可以对其中的某些特征通道贡献强，对另一些贡献弱。一个数字 token 可能占据数字相关的通道。一个变量名可能占据标识符通道。一个结构 token 可能占据语法或格式化通道。压缩器不仅仅是在决定哪些 token 存活；它在学习如何在局部压缩窗口内跨 token 分配特征通道。
 
@@ -652,50 +652,50 @@ CSA 随后形成压缩内容向量：
 
 Lightning Indexer 从历史压缩块中创建压缩 indexer key，并从当前 token 创建 query 侧的 indexer 表征。概念上，对于当前 query token $t$，它计算 query 与每个历史压缩块之间的分数：
 
-\[I_{t,s} = \operatorname{score}\left(q^I_t, K^{I,\mathrm{Comp}}_s\right).\]
+$$I_{t,s} = \operatorname{score}\left(q^I_t, K^{I,\mathrm{Comp}}_s\right).$$
 
 论文实际使用的分数涉及多个 indexer query 头、可学习的头权重和 ReLU 变换的点积，但功能含义是这样的：$I_{t,s}$ 估计压缩块 $s$ 对 token $t$ 是否相关。CSA 然后选择 top-$k$ 压缩条目：
 
-\[\mathcal{S}_t = \operatorname{TopK}(I_{t,:}).\]
+$$\mathcal{S}_t = \operatorname{TopK}(I_{t,:}).$$
 
 对 DeepSeek-V4-Pro，$k = 1024$。对 DeepSeek-V4-Flash，$k = 512$。这意味着 CSA 不在 250,000 个压缩条目上运行主注意力。它首先检索一个依赖 query 的子集，然后仅在这个子集上运行注意力：
 
-\[\operatorname{CSA}(t)
+$$\operatorname{CSA}(t)
 =
 \operatorname{Attn}
 \left(
 q_t,
 \left\{C^{\mathrm{Comp}}_s \mid s \in \mathcal{S}_t\right\}
-\right).\]
+\right).$$
 
 这解释了「压缩稀疏注意力」这个短语。它是压缩的，因为 token 块被合并成了压缩条目。它是稀疏的，因为 query 只关注 top-k 压缩条目而非所有压缩条目。压缩减少了记忆的长度；稀疏检索减少了注意力计算。
 
 HCA（重度压缩注意力）更简单。它使用同样的可学习块压缩的基本思想，但压缩比大得多。不使用 $m = 4$，DeepSeek-V4 使用 $m' = 128$。投影是单内容流和单 logit 流：
 
-\[C = H W_{KV},
+$$C = H W_{KV},
 \qquad
-Z = H W_Z.\]
+Z = H W_Z.$$
 
 对每个 128-token 块，HCA 把 $Z$ 转换为 softmax 权重，并用它们来组合内容向量：
 
-\[S_{m'i:m'(i+1)-1}
+$$S_{m'i:m'(i+1)-1}
 =
 \operatorname{Softmax}_{\mathrm{row}}
 \left(
 Z_{m'i:m'(i+1)-1} + B
-\right),\]
+\right),$$
 
-\[C^{\mathrm{Comp}}_i
+$$C^{\mathrm{Comp}}_i
 =
-\sum_{j=m'i}^{m'(i+1)-1} S_j \odot C_j.\]
+\sum_{j=m'i}^{m'(i+1)-1} S_j \odot C_j.$$
 
 $m' = 128$ 时，一百万 token 仅变成约 7,812 条压缩条目：
 
-\[\frac{1{,}000{,}000}{128} \approx 7{,}812.\]
+$$\frac{1{,}000{,}000}{128} \approx 7{,}812.$$
 
 因为压缩后的序列现在短得多，HCA 不需要 top-k 稀疏检索。它可以负担对所有重度压缩条目的稠密注意力：
 
-\[\operatorname{HCA}(t)
+$$\operatorname{HCA}(t)
 =
 \operatorname{Attn}
 \left(
@@ -706,13 +706,13 @@ C^{\mathrm{Comp}}_1,
 \ldots,
 C^{\mathrm{Comp}}_{\lfloor n/m' \rfloor}
 \right\}
-\right).\]
+\right).$$
 
 CSA 和 HCA 的不同之处在于如何用精度换取成本。CSA 使用中等压缩后跟稀疏检索，更适合相对特定的远处信息。HCA 使用激进压缩后跟稠密注意力，更适合低分辨率全局上下文。不应把 HCA 描述为有保证的「主题记忆」，因为论文并没有证明这一点。更精确的表述是：因为 HCA 把 128 个 token 压缩成一个向量，它天然不能保留所有 token 级细节；它在结构上偏向粗粒度的聚合信息。
 
 滑动窗口分支是必要的，因为 CSA 和 HCA 都是有损的。最近的上下文往往需要精确记忆。下一个 token 可能依赖于紧邻的句法、标点、变量名、缩进或局部推理步骤。DeepSeek-V4 增加了一个局部未压缩注意力分支，窗口大小 $n_{\mathrm{win}} = 128$。模型精确地关注最近的 token，而对远处的 token 使用压缩记忆：
 
-\[O_t = O^{\mathrm{local}}_t + O^{\mathrm{compressed}}_t.\]
+$$O_t = O^{\mathrm{local}}_t + O^{\mathrm{compressed}}_t.$$
 
 论文的实现还包括共享 key-value 的 MQA 式注意力、分组输出投影、部分 RoPE 处理、query/KV 归一化和注意力 sink，所以实际层比这个简单求和要更复杂。但记忆层级可以被这个表达式所捕捉：局部精确注意力提供高分辨率的最近上下文；CSA/HCA 提供压缩的长程上下文。
 
@@ -722,17 +722,17 @@ CSA 和 HCA 的不同之处在于如何用精度换取成本。CSA 使用中等�
 
 效率的故事现在很清楚了。MLA 降低了每个 token 缓存状态的宽度：
 
-\[T \cdot d_{KV} \longrightarrow T \cdot d_{\mathrm{latent}}.\]
+$$T \cdot d_{KV} \longrightarrow T \cdot d_{\mathrm{latent}}.$$
 
 而 CSA 和 HCA 攻击的是 $T$：
 
-\[T \longrightarrow \frac{T}{m},
+$$T \longrightarrow \frac{T}{m},
 \qquad
-T \longrightarrow \frac{T}{m'}.\]
+T \longrightarrow \frac{T}{m'}.$$
 
 CSA 还进一步缩减了核心注意力集合：
 
-\[\frac{T}{m} \longrightarrow k.\]
+$$\frac{T}{m} \longrightarrow k.$$
 
 这就是为什么 DeepSeek-V4 可以瞄准百万 token 上下文。报告称，在一百万 token 时，V4-Pro 仅需 DeepSeek-V3.2 单 token 推理 FLOPs 的 27% 和 KV cache 的 10%；V4-Flash 仅需 10% 的 FLOPs 和 7% 的 KV cache。
 
@@ -754,7 +754,7 @@ CSA 还进一步缩减了核心注意力集合：
 
 AttnRes 把深度轴变成了一个动态数据库。每层不再盲目继承上一层的残差流，而是学到一个伪 query 向量，并在历史层输出上计算 softmax 注意力分布：
 
-\[h_l = \sum_i \alpha_{i \to l} \cdot v_i.\]
+$$h_l = \sum_i \alpha_{i \to l} \cdot v_i.$$
 
 这里 $\alpha_{i \to l}$ 是分配给过去层 $i$ 的规范化相关性权重。直觉很简单：AttnRes 就像在深度上运行的按需检索引擎。如果第 80 层需要第 3 层提取的原始特征，它不必依赖那个特征在 4 到 79 层的累积噪声中存活下来。它可以给第 3 层分配一个高相似度分数，并直接取回那个历史表征。
 
@@ -768,7 +768,7 @@ Moonshot 沿深度向后看，而 DeepSeek 沿宽度向外看。标准残差流�
 
 DeepSeek-V4 的 mHC 通过使用 Sinkhorn-Knopp 算法把残差混合矩阵投影到 Birkhoff 多面体上来稳定这条多流高速路。在实际操作中，路由矩阵被强制为双随机的：每行和每列之和均为 1。由于双随机矩阵的乘积仍然是双随机的，很多层上的复合特征路由映射保持了质量守恒：
 
-\[P_{i \to L} = \prod_j H_{\mathrm{res}}^{(j)}.\]
+$$P_{i \to L} = \prod_j H_{\mathrm{res}}^{(j)}.$$
 
 直觉就是一条完全平衡的多车道高速路。mHC 不像 AttnRes 那样动态地跳回到任意旧层。相反，它做的是在多条残差车道上逐层的局部路由决策。数学约束使这些路由决策保持有界，这样特征就可以在深度上被重排、保持和重组，而不会丢失信号质量或出现爆炸性的方差。
 
