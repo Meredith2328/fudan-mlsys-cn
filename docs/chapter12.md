@@ -99,9 +99,9 @@ NVSwitch 相当于把 8 张卡的「内部总线」做成一个交换机：任�
 
 ## 延伸阅读
 
-- Narayanan et al., *Efficient Large-Scale Language Model Training on GPU Clusters Using Megatron-LM*, SC 2021（3D 并行 + 真实集群）
-- NVIDIA, *NCCL Documentation*（集合通信原语、拓扑感知）
-- NVIDIA, *NVLink / NVSwitch* 白皮书
-- Smith et al., *Using DeepSpeed and Megatron to Train Megatron-Turing NLG 530B*, arXiv 2022（530B 训练实践）
-- Jacobs et al., *Deep Learning in Production*（KubeFlow 生态）
-- Slurm / Kubernetes 官方文档
+- Narayanan et al., [*Efficient Large-Scale Language Model Training on GPU Clusters Using Megatron-LM*](https://arxiv.org/abs/2104.04473), SC 2021（3D 并行 + 真实集群）
+- NVIDIA, [*NCCL Documentation*](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/)（集合通信原语、拓扑感知）
+- NVIDIA, [*NVLink / NVSwitch*](https://www.nvidia.com/en-us/data-center/nvlink/) 白皮书
+- Smith et al., [*Using DeepSpeed and Megatron to Train Megatron-Turing NLG 530B*](https://arxiv.org/abs/2201.11990), arXiv 2022（530B 训练实践）
+- Jacobs et al., [*Deep Learning in Production*](https://www.kubeflow.org/docs/)（KubeFlow 生态）
+- [Slurm 官方文档](https://slurm.schedmd.com/) / [Kubernetes 官方文档](https://kubernetes.io/docs/)

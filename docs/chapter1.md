@@ -647,8 +647,8 @@ GPU 成为 AI 主导平台，揭示了一条更深的原则：**架构的成功�
 
 ## 延伸阅读
 
-- 摩尔定律与功耗墙的经典综述：Mark Horowitz, *Computing's Energy Problem (and What We Can Do About It)*, ISSCC 2014。
-- 算术强度与 Roofline 模型：Samuel Williams 等, *Roofline: An Insightful Visual Performance Model for Multicore Architectures*, CACM 2009（第 5 章会用 Roofline 分析 GEMM）。
-- Amdahl's law 与并行加速的经典限制：Gene Amdahl, *Validity of the Single Processor Approach to Achieving Large-Scale Computing Capabilities*, AFIPS 1967。
-- Ken Batcher 名言的出处背景：常见于并行计算文献讨论（如 HPC 课程讲义）。
-- GPU 架构谱系：NVIDIA, *CUDA C++ Programming Guide*（第 3、4 章将深入）。
+- 摩尔定律与功耗墙的经典综述：Mark Horowitz, [*Computing's Energy Problem (and What We Can Do About It)*](https://doi.org/10.1109/ISSCC.2014.6757323), ISSCC 2014。
+- 算术强度与 Roofline 模型：Samuel Williams 等, [*Roofline: An Insightful Visual Performance Model for Multicore Architectures*](https://doi.org/10.1145/1498765.1498785), CACM 2009（第 5 章会用 Roofline 分析 GEMM）。
+- Amdahl's law 与并行加速的经典限制：Gene Amdahl, [*Validity of the Single Processor Approach to Achieving Large-Scale Computing Capabilities*](https://doi.org/10.1145/1465482.1465560), AFIPS 1967。
+- Ken Batcher 名言的出处背景：常见于并行计算文献讨论，例如 [HPC 课程讲义（如 NERSC 的并行计算入门）](https://hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing-tutorial)；"supercomputer 是把计算受限问题变成 I/O 受限问题" 的表述也见于 [LLNL HPC 教程](https://hpc.llnl.gov/)。
+- GPU 架构谱系：NVIDIA, [*CUDA C++ Programming Guide*](https://docs.nvidia.com/cuda/cuda-c-programming-guide/)（第 3、4 章将深入）。

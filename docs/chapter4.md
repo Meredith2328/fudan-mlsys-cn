@@ -316,11 +316,11 @@ GB200 到 GB300 的对比，为现代架构演进提供了最后一课，具体�
 
 ## 延伸阅读
 
-- NVIDIA, *CUDA C++ Programming Guide*——编程模型、内存层级与 occupancy 的权威参考（对应 4.4–4.6、4.21 节）。
-- NVIDIA, *PTX ISA Reference*（并行线程执行指令集文档）——PTX 语义与 `ptxas` 降级行为（对应 4.9–4.11、4.14 节）。
-- DeepSeek-AI, *DeepSeek-V3 Technical Report*, arXiv:2412.19437, 2024——PTX 级优化、缓存策略控制的工程实例（对应 4.19 节）。
-- NVIDIA, *NVIDIA H100 Tensor Core GPU Architecture*, 2022 白皮书——SM、寄存器堆、L2 与 TMA（对应 4.5、4.21 节）。
-- NVIDIA, *NVIDIA Blackwell GPU Architecture*, 2024 白皮书——TMEM 与 GB200/GB300（对应 4.23、4.24 节）。
-- NVIDIA, *CUTLASS*（CUDA Templates for Linear Algebra Subroutines）文档与源码——共享内存 tile 分块在 GEMM 中的实践（对应 4.6、4.16 节）。
-- Gene Amdahl, *Validity of the Single Processor Approach to Achieving Large-Scale Computing Capabilities*, AFIPS, 1967——Amdahl 定律的来源（对应 4.1 节）。
-- 延迟隐藏（latency hiding）的思想贯穿本章；其在 GPU 上的系统表述见 *CUDA C++ Programming Guide* 的执行模型与性能指导章节。
+- NVIDIA, [*CUDA C++ Programming Guide*](https://docs.nvidia.com/cuda/cuda-c-programming-guide/)——编程模型、内存层级与 occupancy 的权威参考（对应 4.4–4.6、4.21 节）。
+- NVIDIA, [*PTX ISA Reference*](https://docs.nvidia.com/cuda/parallel-thread-execution/)（并行线程执行指令集文档）——PTX 语义与 `ptxas` 降级行为（对应 4.9–4.11、4.14 节）。
+- DeepSeek-AI, [*DeepSeek-V3 Technical Report*](https://arxiv.org/abs/2412.19437), arXiv:2412.19437, 2024——PTX 级优化、缓存策略控制的工程实例（对应 4.19 节）。
+- NVIDIA, [*NVIDIA H100 Tensor Core GPU Architecture*](https://www.nvidia.com/en-us/data-center/h100/), 2022 白皮书——SM、寄存器堆、L2 与 TMA（对应 4.5、4.21 节）。
+- NVIDIA, [*NVIDIA Blackwell GPU Architecture*](https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/), 2024 白皮书——TMEM 与 GB200/GB300（对应 4.23、4.24 节）。
+- NVIDIA, [*CUTLASS*](https://github.com/NVIDIA/cutlass)（CUDA Templates for Linear Algebra Subroutines）文档与源码——共享内存 tile 分块在 GEMM 中的实践（对应 4.6、4.16 节）。
+- Gene Amdahl, [*Validity of the Single Processor Approach to Achieving Large-Scale Computing Capabilities*](https://doi.org/10.1145/1465482.1465560), AFIPS, 1967——Amdahl 定律的来源（对应 4.1 节）。
+- 延迟隐藏（latency hiding）的思想贯穿本章；其在 GPU 上的系统表述见 [*CUDA C++ Programming Guide*](https://docs.nvidia.com/cuda/cuda-c-programming-guide/) 的执行模型与性能指导章节。

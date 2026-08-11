@@ -465,12 +465,12 @@ UI 渲染层
 
 ## 延伸阅读
 
-- 推理-行动交替的经典论文：Shunyu Yao 等, *ReAct: Synergizing Reasoning and Acting in Language Models*, 2022（ICLR 2023）。
-- 工具使用自学习：Timo Schick 等, *Toolformer: Language Models Can Teach Themselves to Use Tools*, NeurIPS 2023。
-- 记忆分层与上下文工程的理论化：Charles Packer 等, *MemGPT: Towards LLMs as Operating Systems*, 2023。
-- 真实仓库任务的编码 agent 基准：Carlos E. Jimenez 等, *SWE-bench: Can Language Models Resolve Real-World GitHub Issues?*, ICLR 2024。
-- 生成与验证分离 / 流程工程：Tal Ridnik 等, *Code Generation with AlphaCodium: From Prompt Engineering to Flow Engineering*, 2024。
-- 结构化工具调用的规范出处：OpenAI, *Function Calling* 官方文档（工具与结构化参数格式的行业惯例）。
-- 标准化的工具接入协议：Anthropic, *Model Context Protocol*（MCP）官方文档与规范。
-- 本章主角的官方资料：Anthropic, *Claude Code Documentation*（产品文档、权限模式、hooks、子代理的说明）。
-- 进阶综述（可选）：Xi Zhiheng 等, *The Rise and Potential of Large Language Model Based Agents: A Survey*, 2023。
+- 推理-行动交替的经典论文：Shunyu Yao 等, [*ReAct: Synergizing Reasoning and Acting in Language Models*](https://arxiv.org/abs/2210.03629), 2022（ICLR 2023）。
+- 工具使用自学习：Timo Schick 等, [*Toolformer: Language Models Can Teach Themselves to Use Tools*](https://arxiv.org/abs/2302.04761), NeurIPS 2023。
+- 记忆分层与上下文工程的理论化：Charles Packer 等, [*MemGPT: Towards LLMs as Operating Systems*](https://arxiv.org/abs/2310.08560), 2023。
+- 真实仓库任务的编码 agent 基准：Carlos E. Jimenez 等, [*SWE-bench: Can Language Models Resolve Real-World GitHub Issues?*](https://arxiv.org/abs/2310.06770), ICLR 2024。
+- 生成与验证分离 / 流程工程：Tal Ridnik 等, [*Code Generation with AlphaCodium: From Prompt Engineering to Flow Engineering*](https://arxiv.org/abs/2401.08500), 2024。
+- 结构化工具调用的规范出处：OpenAI, [*Function Calling*](https://platform.openai.com/docs/guides/function-calling) 官方文档（工具与结构化参数格式的行业惯例）。
+- 标准化的工具接入协议：Anthropic, [*Model Context Protocol*](https://modelcontextprotocol.io/)（MCP）官方文档与规范。
+- 本章主角的官方资料：Anthropic, [*Claude Code Documentation*](https://code.claude.com/docs/)（产品文档、权限模式、hooks、子代理的说明）。
+- 进阶综述（可选）：Xi Zhiheng 等, [*The Rise and Potential of Large Language Model Based Agents: A Survey*](https://arxiv.org/abs/2308.11432), 2023。

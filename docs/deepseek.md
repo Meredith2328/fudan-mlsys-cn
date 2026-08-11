@@ -835,7 +835,7 @@ DeepSeek 的技术路线图，从稀疏参数容量和领域塑造的表征出�
 
 ### 本章接轨的经典与官方资料
 
-- **MQA**：Noam Shazeer, *Fast Transformer Decoding: One Write-Head is All You Need*, 2019（MLA 的对照组，第 11 章已讲）。
-- **GQA**：Joshua Ainslie 等, *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*, EMNLP 2023（第 11 章已讲，与 MLA 的「按头共享 vs 隐空间压缩」对照）。
-- **FP8 训练**：NVIDIA, *Mixed-Precision Training* 与 *FP8 Formats for Deep Learning* 官方文档（V3 的 FP8 混合精度训练的硬件背景；FP8 数值格式的由来，见 NVIDIA 与 Arm 在 MLPerf 生态中的 FP8 提案）。
+- **MQA**：Noam Shazeer, [*Fast Transformer Decoding: One Write-Head is All You Need*](https://arxiv.org/abs/1911.02150), 2019（MLA 的对照组，第 11 章已讲）。
+- **GQA**：Joshua Ainslie 等, [*GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*](https://arxiv.org/abs/2305.13245), EMNLP 2023（第 11 章已讲，与 MLA 的「按头共享 vs 隐空间压缩」对照）。
+- **FP8 训练**：NVIDIA, [*Mixed-Precision Training*](https://docs.nvidia.com/deeplearning/performance/mixed-precision-training/) 与 [*FP8 Formats for Deep Learning*](https://arxiv.org/abs/2209.05433) 官方文档（V3 的 FP8 混合精度训练的硬件背景；FP8 数值格式的由来，见 NVIDIA 与 Arm 在 MLPerf 生态中的 FP8 提案）。
 - **MoE 系统全景**：第 10 章（专家并行、all-to-all、GShard/Switch Transformer 对照）与第 11 章（KV cache、PagedAttention）是读懂本篇的预备知识。

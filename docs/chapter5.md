@@ -430,9 +430,9 @@ H100 共享内存那页幻灯片把意思总结得很清楚：无冲突访问一
 
 ## 延伸阅读
 
-- Roofline 模型：Samuel Williams, Andrew Waterman, David Patterson, *Roofline: An Insightful Visual Performance Model for Multicore Architectures*, CACM, 2009（本文第 3 节的性能上界讨论即出自该模型）。
-- 合并访问、共享内存与 bank 冲突的官方权威说明：NVIDIA, *CUDA C++ Programming Guide*（Coalesced Access、Shared Memory、Bank Conflicts 等章节）。
-- CUTLASS 文档：NVIDIA CUTLASS（开源 CUDA GEMM 模板库），其中关于 warp-level tile、软件流水线、双缓冲与 `mma` 指令的章节，解释了 cuBLAS 类库为什么更强。
-- FlashAttention：Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher Ré, *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*, NeurIPS, 2022（算子融合、避免中间张量落回 HBM 的旁证）。
-- H100 硬件背景：NVIDIA, *NVIDIA H100 Tensor Core GPU Architecture*, 2022（HBM3、张量核、SM 资源的权威数据）。
-- GEMM 手工优化的实践参考：Simon Boehm, *How to Optimize a CUDA Matmul*（博客系列，逐步重建出与本章优化阶梯一致的内核，可作动手实验指南）。
+- Roofline 模型：Samuel Williams, Andrew Waterman, David Patterson, [*Roofline: An Insightful Visual Performance Model for Multicore Architectures*](https://doi.org/10.1145/1498765.1498785), CACM, 2009（本文第 3 节的性能上界讨论即出自该模型）。
+- 合并访问、共享内存与 bank 冲突的官方权威说明：NVIDIA, [*CUDA C++ Programming Guide*](https://docs.nvidia.com/cuda/cuda-c-programming-guide/)（Coalesced Access、Shared Memory、Bank Conflicts 等章节）。
+- CUTLASS 文档：[NVIDIA CUTLASS](https://github.com/NVIDIA/cutlass)（开源 CUDA GEMM 模板库），其中关于 warp-level tile、软件流水线、双缓冲与 `mma` 指令的章节，解释了 cuBLAS 类库为什么更强。
+- FlashAttention：Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher Ré, [*FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*](https://arxiv.org/abs/2205.14135), NeurIPS, 2022（算子融合、避免中间张量落回 HBM 的旁证）。
+- H100 硬件背景：NVIDIA, [*NVIDIA H100 Tensor Core GPU Architecture*](https://www.nvidia.com/en-us/data-center/h100/), 2022（HBM3、张量核、SM 资源的权威数据）。
+- GEMM 手工优化的实践参考：Simon Boehm, [*How to Optimize a CUDA Matmul*](https://siboehm.com/articles/22/CUDA-MMM)（博客系列，逐步重建出与本章优化阶梯一致的内核，可作动手实验指南）。

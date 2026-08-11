@@ -110,11 +110,11 @@ KV cache 的显存 = $2 \times n_{layers} \times d_{head} \times n_{heads} \time
 
 ## 延伸阅读
 
-- Kwon et al., *Efficient Memory Management for Large Language Model Serving with PagedAttention*, SOSP 2023（vLLM 论文）
-- Dao et al., *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*, NeurIPS 2022（推理内核基础）
-- Shazeer, *Fast Transformer Decoding: One Write-Head is All You Need*, 2019（MQA）
-- Ainslie et al., *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*, EMNLP 2023
-- DeepSeek-AI, *DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model*, 2024（MLA）
-- Leviathan et al., *Fast Inference from Transformers via Speculative Decoding*, ICML 2023
-- Chen et al., *Accelerating Large Language Model Decoding with Speculative Sampling*, 2023
-- NVIDIA, *TensorRT-LLM* 文档；SGLang、vLLM 官方文档
+- Kwon et al., [*Efficient Memory Management for Large Language Model Serving with PagedAttention*](https://arxiv.org/abs/2309.06180), SOSP 2023（vLLM 论文）
+- Dao et al., [*FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*](https://arxiv.org/abs/2205.14135), NeurIPS 2022（推理内核基础）
+- Shazeer, [*Fast Transformer Decoding: One Write-Head is All You Need*](https://arxiv.org/abs/1911.02150), 2019（MQA）
+- Ainslie et al., [*GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*](https://arxiv.org/abs/2305.13245), EMNLP 2023
+- DeepSeek-AI, [*DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model*](https://arxiv.org/abs/2405.04434), 2024（MLA）
+- Leviathan et al., [*Fast Inference from Transformers via Speculative Decoding*](https://arxiv.org/abs/2211.17192), ICML 2023
+- Chen et al., [*Accelerating Large Language Model Decoding with Speculative Sampling*](https://arxiv.org/abs/2302.01318), 2023
+- NVIDIA, [*TensorRT-LLM*](https://github.com/NVIDIA/TensorRT-LLM) 文档；SGLang、vLLM 官方文档

@@ -316,11 +316,11 @@ GPU 在工作负载改变时浮现。如果主导计算是大规模、规整、�
 
 ## 延伸阅读
 
-- 量化分析范式与 CPI 分解的标准出处：John L. Hennessy & David A. Patterson, *Computer Architecture: A Quantitative Approach*（第 6 版，Morgan Kaufmann，2017；后续版本收入「Vector Processors and GPUs」等章节）。
-- 访存墙：Wm. A. Wulf & Sally A. McKee, *Hitting the Memory Wall: Implications of the Impossible*, ACM SIGARCH Computer Architecture News, 1995。
-- Flynn 分类法：Michael J. Flynn, *Some Computer Organizations and Their Effectiveness*, IEEE Transactions on Computers, 1972（SISD/SIMD 等四分类的原始出处）。
-- 功耗墙与频率缩放的终结：Mark Horowitz, *Computing's Energy Problem (and What We Can Do About It)*, ISSCC 2014（第 1 章已引）；更早可追溯 Shekhar Borkar, *Design Challenges of Technology Scaling*, IEEE Micro, 1999。
-- 吞吐计算与 GPU 架构的官方文档：NVIDIA, *CUDA C++ Programming Guide*；NVIDIA, *NVIDIA A100 Tensor Core GPU Architecture* 白皮书（张量核、HBM、NVLink 的硬件背景）。
-- 统一着色器与 SIMT 架构：Erik Lindholm 等, *NVIDIA Tesla: A Unified Graphics and Computing Architecture*, IEEE Micro, 2008（G80 的原始论文，也是第 3 章 SIMT/warp 话题的入口）。
-- MFU 指标出处：Aakanksha Chowdhery 等, *PaLM: Scaling Language Modeling with Pathways*, 2022（首次系统性报告大模型训练的 Model FLOPs Utilization）。
-- 图形管线与 MVP 变换的经典教材：James D. Foley 等, *Computer Graphics: Principles and Practice*（第 3 版，Addison-Wesley, 2014）。
+- 量化分析范式与 CPI 分解的标准出处：John L. Hennessy & David A. Patterson, [*Computer Architecture: A Quantitative Approach*](https://www.elsevier.com/books/computer-architecture/hennessy/978-0-12-811905-1)（第 6 版，Morgan Kaufmann，2017；后续版本收入「Vector Processors and GPUs」等章节）。
+- 访存墙：Wm. A. Wulf & Sally A. McKee, [*Hitting the Memory Wall: Implications of the Impossible*](https://doi.org/10.1145/216585.216588), ACM SIGARCH Computer Architecture News, 1995。
+- Flynn 分类法：Michael J. Flynn, [*Some Computer Organizations and Their Effectiveness*](https://doi.org/10.1109/TC.1972.5009071), IEEE Transactions on Computers, 1972（SISD/SIMD 等四分类的原始出处）。
+- 功耗墙与频率缩放的终结：Mark Horowitz, [*Computing's Energy Problem (and What We Can Do About It)*](https://doi.org/10.1109/ISSCC.2014.6757323), ISSCC 2014（第 1 章已引）；更早可追溯 Shekhar Borkar, *Design Challenges of Technology Scaling*, IEEE Micro, 1999。
+- 吞吐计算与 GPU 架构的官方文档：NVIDIA, [*CUDA C++ Programming Guide*](https://docs.nvidia.com/cuda/cuda-c-programming-guide/)；NVIDIA, [*NVIDIA A100 Tensor Core GPU Architecture*](https://www.nvidia.com/en-us/data-center/a100/) 白皮书（张量核、HBM、NVLink 的硬件背景）。
+- 统一着色器与 SIMT 架构：Erik Lindholm 等, [*NVIDIA Tesla: A Unified Graphics and Computing Architecture*](https://doi.org/10.1109/MM.2008.31), IEEE Micro, 2008（G80 的原始论文，也是第 3 章 SIMT/warp 话题的入口）。
+- MFU 指标出处：Aakanksha Chowdhery 等, [*PaLM: Scaling Language Modeling with Pathways*](https://arxiv.org/abs/2204.02311), 2022（首次系统性报告大模型训练的 Model FLOPs Utilization）。
+- 图形管线与 MVP 变换的经典教材：James D. Foley 等, [*Computer Graphics: Principles and Practice*](https://www.cs.unm.edu/~angel/BOOK/INTERACTIVE_COMPUTER_GRAPHICS/)（第 3 版，Addison-Wesley, 2014）。

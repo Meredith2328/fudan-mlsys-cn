@@ -429,11 +429,11 @@ Brook 提供了正确的早期抽象：把 GPU 重新定义成"带内核的流�
 
 ## 延伸阅读
 
-- Ian Buck 等, *BrookGPU: Stream Computing on Graphics Hardware*, SIGGRAPH 2004（Brook 流编程模型的原始论文）。
-- NVIDIA, *CUDA C++ Programming Guide*（SM 硬件模型、grid/block/thread 层级、SIMT 与 warp 的权威定义）。
-- NVIDIA, *NVIDIA Fermi Compute Architecture Whitepaper*, 2010（统一着色器架构、SM 与 SIMT 的架构说明）。
-- NVIDIA, *GeForce 8800* 架构资料（统一着色器架构引入的公开描述，常与 Tesla 架构并称）。
-- NVIDIA, *NVIDIA Tesla V100 GPU Architecture Whitepaper*, 2017（张量核首次登场，Volta）。
-- NVIDIA, *NVIDIA Hopper（H100）Architecture White Paper*, 2022（TMA、异步数据搬移、线程块簇）。
-- NVIDIA, *NVIDIA Blackwell Architecture Whitepaper*, 2024（FP4/FP8 精度档位与新一代张量核）。
-- 算术强度与 Roofline 模型：Samuel Williams, Andrew Waterman, David Patterson, *Roofline: An Insightful Visual Performance Model for Multicore Architectures*, CACM 2009。
+- Ian Buck 等, [*BrookGPU: Stream Computing on Graphics Hardware*](https://graphics.stanford.edu/papers/brookgpu/), SIGGRAPH 2004（Brook 流编程模型的原始论文）。
+- NVIDIA, [*CUDA C++ Programming Guide*](https://docs.nvidia.com/cuda/cuda-c-programming-guide/)（SM 硬件模型、grid/block/thread 层级、SIMT 与 warp 的权威定义）。
+- NVIDIA, [*NVIDIA Fermi Compute Architecture Whitepaper*](https://www.nvidia.com/content/PDF/fermi_white_papers/NVIDIA_Fermi_Compute_Architecture_Whitepaper.pdf), 2010（统一着色器架构、SM 与 SIMT 的架构说明）。
+- NVIDIA, [*GeForce 8800*](https://www.nvidia.com/en-us/geforce/news/) 架构资料（统一着色器架构引入的公开描述，常与 Tesla 架构并称）。
+- NVIDIA, [*NVIDIA Tesla V100 GPU Architecture Whitepaper*](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/tesla-product-literature/volta-architecture-whitepaper.pdf), 2017（张量核首次登场，Volta）。
+- NVIDIA, [*NVIDIA Hopper（H100）Architecture White Paper*](https://www.nvidia.com/en-us/data-center/h100/), 2022（TMA、异步数据搬移、线程块簇）。
+- NVIDIA, [*NVIDIA Blackwell Architecture Whitepaper*](https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/), 2024（FP4/FP8 精度档位与新一代张量核）。
+- 算术强度与 Roofline 模型：Samuel Williams, Andrew Waterman, David Patterson, [*Roofline: An Insightful Visual Performance Model for Multicore Architectures*](https://doi.org/10.1145/1498765.1498785), CACM 2009。

@@ -501,16 +501,16 @@ $$5abss + 34bsh \approx 5 a b s^2 + 34 b s h$$
 
 ## 延伸阅读
 
-- 数据并行与梯度同步的标准实现：PyTorch, *DistributedDataParallel* 官方文档（`pytorch.org/docs/stable/notes/ddp.html`）；其梯度同步后端：NVIDIA, *NCCL（NVIDIA Collective Communications Library）* 官方文档。
-- 集合通信的接口与标准：Message Passing Interface Forum, *MPI: A Message-Passing Interface Standard*（集合操作的权威定义来源）。
-- Ring All-Reduce 的原始出处：Pitch Patarasuk & Xin Yuan, *Optimal All-Reduce Algorithms for Mesh-Connected Computer Architectures*, IEEE TPDS, 2009。
-- 树形/蝶形归约与层次化通信的更早讨论：Rolf Rabenseifner, *Optimization of Collective Reduction Operations*, ICCS 2004。
-- Adam 优化器：Diederik P. Kingma & Jimmy Ba, *Adam: A Method for Stochastic Optimization*, ICLR 2015。
-- 参数服务器架构：Mu Li, David G. Andersen, Jun Woo Park, Alexander J. Smola 等, *Scaling Distributed Machine Learning with the Parameter Server*, OSDI 2014。
-- ZeRO 与三个分片阶段：Samyam Rajbhandari, Jeff Rasley, Olatunji Ruwase, Yuxiong He, *ZeRO: Memory Optimizations Toward Training Trillion Parameter Models*, SC 2020（实现见 Microsoft DeepSpeed 仓库）。
-- ZeRO-Infinity：Samyam Rajbhandari 等, *ZeRO-Infinity: Breaking the GPU Memory Wall for Extreme Scale Deep Learning*, SC 2021。
-- ZeRO++：Guanhua Wang 等, *ZeRO++: Extremely Efficient Collective Communication for Giant Model Training*, 2023。
-- 激活重计算（梯度检查点）：Tianqi Chen, Bing Xu, Chiyuan Zhang, Carlos Guestrin, *Training Deep Nets with Sublinear Memory Cost*, 2016；更细的层内记账与选择性重算见 Vijay Korthikanti 等, *Reducing Activation Recomputation in Large Transformer Models*, 2022。
-- FlashAttention（缓解注意力分数激活随 $s^2$ 增长的问题）：Tri Dao 等, *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*, NeurIPS 2022。
-- 训练计算量 6ND 与批量规模的实证：Tom B. Brown 等, *Language Models are Few-Shot Learners*, NeurIPS 2020（GPT-3：175B 参数、96 层、$d_{\text{model}}=12288$、批 3.2M token）。
-- 内存墙术语出处：Wm. A. Wulf & Sally A. McKee, *Hitting the Memory Wall: Implications of the Impossible*, ACM SIGARCH Computer Architecture News, 1995（第 2 章已引）。
+- 数据并行与梯度同步的标准实现：PyTorch, [*DistributedDataParallel*](https://pytorch.org/docs/stable/notes/ddp.html) 官方文档（`pytorch.org/docs/stable/notes/ddp.html`）；其梯度同步后端：NVIDIA, [*NCCL（NVIDIA Collective Communications Library）*](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/) 官方文档。
+- 集合通信的接口与标准：Message Passing Interface Forum, [*MPI: A Message-Passing Interface Standard*](https://www.mpi-forum.org/docs/)（集合操作的权威定义来源）。
+- Ring All-Reduce 的原始出处：Pitch Patarasuk & Xin Yuan, [*Optimal All-Reduce Algorithms for Mesh-Connected Computer Architectures*](https://doi.org/10.1109/TPDS.2009.71), IEEE TPDS, 2009。
+- 树形/蝶形归约与层次化通信的更早讨论：Rolf Rabenseifner, [*Optimization of Collective Reduction Operations*](https://doi.org/10.1007/978-3-540-24685-5_1), ICCS 2004。
+- Adam 优化器：Diederik P. Kingma & Jimmy Ba, [*Adam: A Method for Stochastic Optimization*](https://arxiv.org/abs/1412.6980), ICLR 2015。
+- 参数服务器架构：Mu Li, David G. Andersen, Jun Woo Park, Alexander J. Smola 等, [*Scaling Distributed Machine Learning with the Parameter Server*](https://arxiv.org/abs/1403.6376), OSDI 2014。
+- ZeRO 与三个分片阶段：Samyam Rajbhandari, Jeff Rasley, Olatunji Ruwase, Yuxiong He, [*ZeRO: Memory Optimizations Toward Training Trillion Parameter Models*](https://arxiv.org/abs/1910.02054), SC 2020（实现见 Microsoft DeepSpeed 仓库）。
+- ZeRO-Infinity：Samyam Rajbhandari 等, [*ZeRO-Infinity: Breaking the GPU Memory Wall for Extreme Scale Deep Learning*](https://arxiv.org/abs/2104.07857), SC 2021。
+- ZeRO++：Guanhua Wang 等, [*ZeRO++: Extremely Efficient Collective Communication for Giant Model Training*](https://arxiv.org/abs/2306.10209), 2023。
+- 激活重计算（梯度检查点）：Tianqi Chen, Bing Xu, Chiyuan Zhang, Carlos Guestrin, [*Training Deep Nets with Sublinear Memory Cost*](https://arxiv.org/abs/1604.06174), 2016；更细的层内记账与选择性重算见 Vijay Korthikanti 等, [*Reducing Activation Recomputation in Large Transformer Models*](https://arxiv.org/abs/2205.05198), 2022。
+- FlashAttention（缓解注意力分数激活随 $s^2$ 增长的问题）：Tri Dao 等, [*FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*](https://arxiv.org/abs/2205.14135), NeurIPS 2022。
+- 训练计算量 6ND 与批量规模的实证：Tom B. Brown 等, [*Language Models are Few-Shot Learners*](https://arxiv.org/abs/2005.14165), NeurIPS 2020（GPT-3：175B 参数、96 层、$d_{\text{model}}=12288$、批 3.2M token）。
+- 内存墙术语出处：Wm. A. Wulf & Sally A. McKee, [*Hitting the Memory Wall: Implications of the Impossible*](https://doi.org/10.1145/216585.216588), ACM SIGARCH Computer Architecture News, 1995（第 2 章已引）。

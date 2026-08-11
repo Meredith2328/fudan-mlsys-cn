@@ -114,12 +114,12 @@ MoE 给分布式训练带来新机会：既然每个 token 只用部分专家，
 
 ## 延伸阅读
 
-- Shoeybi et al., *Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism*, arXiv 2019（张量并行的奠基）
-- Narayanan et al., *Efficient Large-Scale Language Model Training on GPU Clusters Using Megatron-LM*, SC 2021（3D 并行 + 序列并行）
-- Huang et al., *GPipe: Efficient Training of Giant Neural Networks using Pipeline Parallelism*, NeurIPS 2019
-- Narayanan et al., *PipeDream: Fast and Efficient Pipeline Parallel DNN Training*, arXiv 2018
-- Lepikhin et al., *GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding*, ICLR 2021
-- Fedus et al., *Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity*, JMLR 2022
-- Liu et al., *Ring Attention with Blockwise Transformers for Near-Infinite Context*, ICLR 2024
-- DeepSeek-AI, *DeepSeek-V3 Technical Report*, arXiv 2024（DSA、节点内共享专家）
-- NVIDIA, *Megatron-DeepSpeed* 与 *NVIDIA Collective Communication Library (NCCL)* 文档
+- Shoeybi et al., [*Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism*](https://arxiv.org/abs/1909.08053), arXiv 2019（张量并行的奠基）
+- Narayanan et al., [*Efficient Large-Scale Language Model Training on GPU Clusters Using Megatron-LM*](https://arxiv.org/abs/2104.04473), SC 2021（3D 并行 + 序列并行）
+- Huang et al., [*GPipe: Efficient Training of Giant Neural Networks using Pipeline Parallelism*](https://arxiv.org/abs/1811.06965), NeurIPS 2019
+- Narayanan et al., [*PipeDream: Fast and Efficient Pipeline Parallel DNN Training*](https://arxiv.org/abs/1806.03377), arXiv 2018
+- Lepikhin et al., [*GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding*](https://arxiv.org/abs/2006.16668), ICLR 2021
+- Fedus et al., [*Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity*](https://arxiv.org/abs/2101.03961), JMLR 2022
+- Liu et al., [*Ring Attention with Blockwise Transformers for Near-Infinite Context*](https://arxiv.org/abs/2310.01889), ICLR 2024
+- DeepSeek-AI, [*DeepSeek-V3 Technical Report*](https://arxiv.org/abs/2412.19437), arXiv 2024（DSA、节点内共享专家）
+- NVIDIA, [*Megatron-DeepSpeed*](https://github.com/microsoft/Megatron-DeepSpeed) 与 [*NVIDIA Collective Communication Library (NCCL)*](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/) 文档

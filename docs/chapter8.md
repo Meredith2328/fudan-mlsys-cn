@@ -333,10 +333,10 @@ $$
 
 ## 延伸阅读
 
-- Transformer 原始论文：Ashish Vaswani 等, *Attention Is All You Need*, NeurIPS 2017（arXiv:1706.03762）。本章的缩放点积注意力、多头、掩码、位置编码正弦公式都出自这里。
-- 阅读指引：Harvard NLP, *The Annotated Transformer*——逐行注释的 PyTorch 实现，配合原文阅读。
-- 官方文档：Hugging Face, *transformers* 文档（`pipeline()`、模型仓库 Model Hub；`pipeline` 的预处理/推理/后处理三阶段设计见官方教程与《NLP with Transformers》一书）。
-- 子词分词：Rico Sennrich 等, *Neural Machine Translation of Rare Words with Subword Units*, ACL 2016（BPE 的原始出处）；BERT 的 WordPiece 见 Jacob Devlin 等的 BERT 论文。
-- RoPE：Jianlin Su 等, *RoFormer: Enhanced Transformer with Rotary Position Embedding*, 2021（旋转位置编码的原始出处，LLaMA 等主流模型的默认位置编码）。
-- FlashAttention：Tri Dao 等, *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*, NeurIPS 2022（第 11 章推理系统会展开的注意力系统优化代表作）。
-- KV cache 前置参考：自回归推理的 KV 缓存机制见第 11 章；通俗讲解可参考 Hugging Face 博客 *What Is a KV Cache?*。
+- Transformer 原始论文：Ashish Vaswani 等, [*Attention Is All You Need*](https://arxiv.org/abs/1706.03762), NeurIPS 2017（arXiv:1706.03762）。本章的缩放点积注意力、多头、掩码、位置编码正弦公式都出自这里。
+- 阅读指引：Harvard NLP, [*The Annotated Transformer*](https://nlp.seas.harvard.edu/annotated-transformer/)——逐行注释的 PyTorch 实现，配合原文阅读。
+- 官方文档：Hugging Face, [*transformers*](https://huggingface.co/docs/transformers/) 文档（`pipeline()`、模型仓库 Model Hub；`pipeline` 的预处理/推理/后处理三阶段设计见官方教程与《NLP with Transformers》一书）。
+- 子词分词：Rico Sennrich 等, [*Neural Machine Translation of Rare Words with Subword Units*](https://arxiv.org/abs/1508.07909), ACL 2016（BPE 的原始出处）；BERT 的 WordPiece 见 Jacob Devlin 等的 BERT 论文。
+- RoPE：Jianlin Su 等, [*RoFormer: Enhanced Transformer with Rotary Position Embedding*](https://arxiv.org/abs/2104.09864), 2021（旋转位置编码的原始出处，LLaMA 等主流模型的默认位置编码）。
+- FlashAttention：Tri Dao 等, [*FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*](https://arxiv.org/abs/2205.14135), NeurIPS 2022（第 11 章推理系统会展开的注意力系统优化代表作）。
+- KV cache 前置参考：自回归推理的 KV 缓存机制见第 11 章；通俗讲解可参考 Hugging Face 博客 [*What Is a KV Cache?*](https://huggingface.co/blog/kv-cache)。

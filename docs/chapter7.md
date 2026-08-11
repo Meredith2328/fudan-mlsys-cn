@@ -610,32 +610,32 @@ CUDA-L2 属于一个更大的运动。课程结尾的幻灯片把近年工作正
 
 ### 核心编译器系统
 
-- Chen, T. et al., *TVM: An Automated End-to-End Optimizing Compiler for Deep Learning*, OSDI 2018（TVM 与 AutoTVM 的原始论文）。
-- Ragan-Kelley, J. et al., *Halide: Decoupling Algorithms from Schedules for Structured Image Processing Pipelines*, PLDI 2013（compute-schedule 分离思想的最早出处，TVM 的直接思想先辈）。
-- Roesch, J. et al., *Relay: A New IR for Machine Learning Frameworks*, MAPL 2018。
-- Feng, S. et al., *TensorIR: An Abstraction for Automatic Code Generation*, ASPLOS 2023。
-- Shao, J. et al., *Meta Schedule: A Generic Engine for TVM's Schedule Tuning*, arXiv 2022（TVM 第三代自动调度）。
-- Apache TVM 官方文档：architecture、Relax、TensorIR 与调度体系。
+- Chen, T. et al., [*TVM: An Automated End-to-End Optimizing Compiler for Deep Learning*](https://arxiv.org/abs/1802.04799), OSDI 2018（TVM 与 AutoTVM 的原始论文）。
+- Ragan-Kelley, J. et al., [*Halide: Decoupling Algorithms from Schedules for Structured Image Processing Pipelines*](https://doi.org/10.1145/2185520.2185528), PLDI 2013（compute-schedule 分离思想的最早出处，TVM 的直接思想先辈）。
+- Roesch, J. et al., [*Relay: A New IR for Machine Learning Frameworks*](https://arxiv.org/abs/1810.00952), MAPL 2018。
+- Feng, S. et al., [*TensorIR: An Abstraction for Automatic Code Generation*](https://arxiv.org/abs/2207.04296), ASPLOS 2023。
+- Shao, J. et al., [*Meta Schedule: A Generic Engine for TVM's Schedule Tuning*](https://arxiv.org/abs/2204.14024), arXiv 2022（TVM 第三代自动调度）。
+- [Apache TVM 官方文档](https://tvm.apache.org/docs/)：architecture、Relax、TensorIR 与调度体系。
 
 ### Triton
 
-- Tillet, P., Kung, H. T., Cox, D., *Triton: An Intermediate Language and Compiler for Tiled Neural Network Computations*, MAPL 2019。
-- OpenAI Triton 官方文档与教程：vector add、fused softmax、GEMM、fused attention、grouped GEMM、persistent matmul。
+- Tillet, P., Kung, H. T., Cox, D., [*Triton: An Intermediate Language and Compiler for Tiled Neural Network Computations*](https://arxiv.org/abs/1907.00324), MAPL 2019。
+- [OpenAI Triton 官方文档与教程](https://triton-lang.org/)：vector add、fused softmax、GEMM、fused attention、grouped GEMM、persistent matmul。
 
 ### TileLang
 
-- *TileLang: A Composable Tiled Programming Model for AI Systems*, arXiv 2024。
-- TileLang 官方文档：language basics、instructions、layout / swizzle、matmul tutorial。
+- [*TileLang: A Composable Tiled Programming Model for AI Systems*](https://arxiv.org/abs/2504.17577), arXiv 2024。
+- [TileLang 官方文档](https://tilelang.readthedocs.io/)：language basics、instructions、layout / swizzle、matmul tutorial。
 
 ### CUDA-L2 与学习式内核优化
 
-- *CUDA-L2: Surpassing cuBLAS Performance for Matrix Multiplication through Reinforcement Learning*, arXiv 2025。
-- *AutoTriton: Optimizing Triton Kernels through Automatic Scheduling*, arXiv 2025。
-- *KernelBench: Can LLMs Write Efficient GPU Kernels?*, arXiv 2025。
+- [*CUDA-L2: Surpassing cuBLAS Performance for Matrix Multiplication through Reinforcement Learning*](https://arxiv.org/abs/2512.02551), arXiv 2025。
+- [*AutoTriton: Optimizing Triton Kernels through Automatic Scheduling*](https://arxiv.org/abs/2507.05687), arXiv 2025。
+- [*KernelBench: Can LLMs Write Efficient GPU Kernels?*](https://arxiv.org/abs/2502.10517), arXiv 2025。
 - Dr. Kernel、CUDA Agent、Kernel-Smith、K-Search、SwizzlePerf 等系统见第 13 节，可按题目在 arXiv 检索。
 
 ### 相邻语境
 
-- Lattner, C. et al., *MLIR: Scaling Compiler Infrastructure for Domain Specific Computation*, CGO 2021；MLIR 官方文档（多层 IR 栈与方言机制的最佳参照）。
-- Google XLA 官方文档（JIT 编译器与 HLO IR；与 TVM 同属 LLM 之前一代编译器）。
-- Dao, T. et al., *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*, NeurIPS 2022（特化内核的标杆，也是理解 Triton 为什么够用、又为什么不够用的对读材料）。
+- Lattner, C. et al., [*MLIR: Scaling Compiler Infrastructure for Domain Specific Computation*](https://arxiv.org/abs/2002.03754), CGO 2021；MLIR 官方文档（多层 IR 栈与方言机制的最佳参照）。
+- [Google XLA 官方文档](https://www.tensorflow.org/xla)（JIT 编译器与 HLO IR；与 TVM 同属 LLM 之前一代编译器）。
+- Dao, T. et al., [*FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*](https://arxiv.org/abs/2205.14135), NeurIPS 2022（特化内核的标杆，也是理解 Triton 为什么够用、又为什么不够用的对读材料）。

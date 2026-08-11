@@ -23,6 +23,28 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(katex, { output: 'html' })
+      // 中文排版修正：CommonMark 对 ** 强调的 flanking 要求"星号不能紧邻标点"，
+      // 导致 `**术语（English）**汉字`、`**「引号」**` 这类中文粗体无法渲染
+      // （全角右括号/引号被视为标点，开或闭的 ** 被判定失效）。
+      // 放宽规则：** 紧邻非 ASCII 字符（中文/全角标点）时，允许作为左包围或右包围。
+      const emphRule = md.inline.ruler.__rules__.find((r) => r.name === 'emphasis')
+      const origFn = emphRule.fn
+      const origScan = md.inline.State.prototype.scanDelims
+      emphRule.fn = function (state, silent) {
+        state.scanDelims = function (start, canSplitWord) {
+          const res = origScan.call(this, start, canSplitWord)
+          if (this.src.charCodeAt(start) === 0x2a && this.src.charCodeAt(start + 1) === 0x2a) {
+            const prevChar = start > 0 ? this.src.charCodeAt(start - 1) : 0
+            const nextChar = start + 2 < this.src.length ? this.src.charCodeAt(start + 2) : 0
+            if (nextChar > 0x7f) res.can_open = true
+            if (prevChar > 0x7f) res.can_close = true
+          }
+          return res
+        }
+        const result = origFn.call(this, state, silent)
+        state.scanDelims = origScan
+        return result
+      }
     },
   },
 
