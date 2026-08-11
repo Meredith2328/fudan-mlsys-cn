@@ -4,9 +4,11 @@
 # MLSYS 课程项目 · 第二阶段：LoRA 算子的 Agentic 优化
 
 **截止时间：2026 年 5 月 12 日上午 8:00**
+
 **评测设备：NVIDIA GeForce RTX 3090**
 
 第一阶段里，你搭建了一个能探测 GPU 属性并推理性能的 agentic profiling 工具。
+
 第二阶段，你要为一个 LoRA 式算子构建一个**优化 agent**。目标不是交一个手工写的静态 kernel，而是构建一个能迭代式生成、测试、profiling 并改进 CUDA 实现的 **agent 系统**。
 
 ---
@@ -26,6 +28,7 @@ $B \in \mathbb{R}^{d \times r}$，
 $r = 16$。
 
 所有张量均以 **`.pt` 文件**存储，可通过 `torch.load` 加载。
+
 所有隐藏评测张量使用 **`float32`**。
 
 ### 尺寸范围
@@ -114,6 +117,7 @@ bash run.sh
 - **GCC：**11.4.0
 
 `nvcc` 在 CUDA toolkit 安装中即可使用。
+
 需要时也可依赖标准 PyTorch 扩展工具链。
 
 ---
