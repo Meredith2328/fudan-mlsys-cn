@@ -6,4 +6,5 @@ node_modules
 .orig/
 .conv_html.py
 .conv_test.py
-docs/.vitepress/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
