@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-import mathjax3 from 'markdown-it-mathjax3'
+import katex from 'markdown-it-katex'
 
 // 站点侧边栏 = 课程的地图。
 // 分组方式刻意按「MLSys / AI Infra 体系的认知顺序」组织，
@@ -16,11 +16,12 @@ export default defineConfig({
 
   head: [
     ['meta', { name: 'theme-color', content: '#0b6bcb' }],
+    ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css' }],
   ],
 
   markdown: {
     config: (md) => {
-      md.use(mathjax3)
+      md.use(katex)
     },
   },
 

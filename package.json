@@ -5,10 +5,10 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
-    "docsify": "^4.13.1"
+    "docsify": "^4.13.1",
+    "markdown-it-katex": "^2.0.3"
   },
   "devDependencies": {
-    "markdown-it-mathjax3": "^4.3.2",
     "vitepress": "^1.6.3"
   }
 }
