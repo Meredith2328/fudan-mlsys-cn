@@ -3,3 +3,7 @@ __pycache__/
 node_modules
 /.omx
 *.json
+.orig/
+.conv_html.py
+.conv_test.py
+docs/.vitepress/

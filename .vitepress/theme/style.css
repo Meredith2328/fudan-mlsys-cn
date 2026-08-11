@@ -1,0 +1,56 @@
+/* 延续旧 docsify 站点的观感：浅蓝灰底、衬线正文、紧凑代码。
+   刻意克制，不做大改——内容比样式重要。 */
+
+:root {
+  --vp-c-brand-1: #0b6bcb;
+  --vp-c-brand-2: #0a5cb0;
+  --vp-c-brand-3: #0b6bcb;
+  --vp-c-brand-soft: rgba(11, 107, 203, 0.12);
+
+  --vp-font-family-base: "Noto Serif SC", "Source Han Serif SC", "Songti SC",
+    "Georgia", "PingFang SC", "Microsoft YaHei", serif;
+  --vp-font-family-mono: "Cascadia Code", "JetBrains Mono", "Fira Code",
+    "Consolas", monospace;
+}
+
+.VPDoc .content-container {
+  max-width: 980px;
+}
+
+.vp-doc p,
+.vp-doc li {
+  line-height: 1.9;
+}
+
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3 {
+  letter-spacing: 0.01em;
+}
+
+/* 让引用块比默认更接近原站的手感 */
+.vp-doc blockquote {
+  border-left: 4px solid rgba(11, 107, 203, 0.35);
+  background: rgba(11, 107, 203, 0.05);
+  padding: 0.6rem 1rem;
+  border-radius: 0 10px 10px 0;
+}
+
+/* 表格横向可滚，避免长内容撑破版面 */
+.vp-doc table {
+  display: block;
+  overflow-x: auto;
+}
+
+/* 「本章位置」提示条的配色，与品牌色一致但不抢眼 */
+.vp-doc .hint-position {
+  border-left: 4px solid rgba(11, 107, 203, 0.5);
+  background: rgba(11, 107, 203, 0.06);
+  padding: 0.8rem 1.1rem;
+  border-radius: 0 10px 10px 0;
+  margin: 1rem 0;
+  font-size: 0.92em;
+}
+.vp-doc .hint-position p {
+  margin: 0.3rem 0;
+}
