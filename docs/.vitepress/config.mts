@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-import katex from 'markdown-it-katex'
+import { katex } from '@mdit/plugin-katex'
 
 // 站点侧边栏 = 课程的地图。
 // 分组方式刻意按「MLSys / AI Infra 体系的认知顺序」组织，
@@ -16,12 +16,13 @@ export default defineConfig({
 
   head: [
     ['meta', { name: 'theme-color', content: '#0b6bcb' }],
-    ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css' }],
+    // KaTeX 样式：随包版本本地引入（node_modules/katex/dist/katex.min.css 拷贝到 docs/public/katex.min.css），避免 CDN 版本漂移
+    ['link', { rel: 'stylesheet', href: '/fudan-mlsys-cn/katex.min.css' }],
   ],
 
   markdown: {
     config: (md) => {
-      md.use(katex)
+      md.use(katex, { output: 'html' })
     },
   },
 

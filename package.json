@@ -5,8 +5,9 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
+    "@mdit/plugin-katex": "^1.0.3",
     "docsify": "^4.13.1",
-    "markdown-it-katex": "^2.0.3"
+    "katex": "^0.18.4"
   },
   "devDependencies": {
     "vitepress": "^1.6.3"
